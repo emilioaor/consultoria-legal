@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">consultores</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="empresa" view="colnames">
+<left>545</left>
+<top>313</top>
+<width>110</width>
+<height>192</height>
+<sql_create_table>CREATE TABLE `empresa` (
+  `EmpresaID` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(40) NOT NULL,
+  `Direccion` varchar(50) NOT NULL,
+  `Telefono` char(11) NOT NULL,
+  `Ciudad` varchar(25) NOT NULL,
+  `fax` char(11) DEFAULT NULL,
+  `cod_ramo` int(11) NOT NULL,
+  PRIMARY KEY (`EmpresaID`),
+  KEY `cod_ramo` (`cod_ramo`),
+  CONSTRAINT `empresa_ibfk_1` FOREIGN KEY (`cod_ramo`) REFERENCES `ramo` (`cod_ramo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="usuario" view="colnames">
+<left>688</left>
+<top>152</top>
+<width>110</width>
+<height>141</height>
+<sql_create_table>CREATE TABLE `usuario` (
+  `usuario` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `cod_nivel` int(11) NOT NULL,
+  `EmpresaID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`usuario`),
+  KEY `EmpresaID` (`EmpresaID`),
+  KEY `cod_nivel` (`cod_nivel`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`EmpresaID`) REFERENCES `empresa` (`EmpresaID`),
+  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`cod_nivel`) REFERENCES `nivel_usuario` (`cod_nivel`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="representante_legal" view="colnames">
+<left>854</left>
+<top>337</top>
+<width>147</width>
+<height>192</height>
+<sql_create_table>CREATE TABLE `representante_legal` (
+  `EmpresaID` int(11) NOT NULL,
+  `cedula` varchar(8) NOT NULL,
+  `apellido` varchar(25) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `direccion` varchar(50) NOT NULL,
+  `cargo` varchar(30) NOT NULL,
+  `telefono` char(11) NOT NULL,
+  PRIMARY KEY (`EmpresaID`),
+  CONSTRAINT `representante_legal_ibfk_1` FOREIGN KEY (`EmpresaID`) REFERENCES `empresa` (`EmpresaID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="solicitud" view="colnames">
+<left>373</left>
+<top>154</top>
+<width>124</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `solicitud` (
+  `num_solicitud` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` datetime NOT NULL,
+  `EmpresaID` int(11) NOT NULL,
+  `observacion` text NOT NULL,
+  `estatus` varchar(20) NOT NULL,
+  PRIMARY KEY (`num_solicitud`,`fecha`,`EmpresaID`),
+  KEY `EmpresaID` (`EmpresaID`),
+  CONSTRAINT `solicitud_ibfk_1` FOREIGN KEY (`EmpresaID`) REFERENCES `empresa` (`EmpresaID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="servicio" view="colnames">
+<left>76</left>
+<top>40</top>
+<width>117</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `servicio` (
+  `cod_servicio` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` text NOT NULL,
+  `precio` decimal(6,2) NOT NULL,
+  PRIMARY KEY (`cod_servicio`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="nivel_usuario" view="colnames">
+<left>874</left>
+<top>187</top>
+<width>110</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `nivel_usuario` (
+  `cod_nivel` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(20) NOT NULL,
+  PRIMARY KEY (`cod_nivel`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="ramo" view="colnames">
+<left>412</left>
+<top>452</top>
+<width>112</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `ramo` (
+  `cod_ramo` int(11) NOT NULL AUTO_INCREMENT,
+  `Descripcion` varchar(50) NOT NULL,
+  PRIMARY KEY (`cod_ramo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="detalles_solicitud" view="colnames">
+<left>211</left>
+<top>47</top>
+<width>124</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `detalles_solicitud` (
+  `DetalleID` int(11) NOT NULL AUTO_INCREMENT,
+  `num_solicitud` int(11) NOT NULL,
+  `cod_servicio` int(11) NOT NULL,
+  PRIMARY KEY (`DetalleID`,`num_solicitud`,`cod_servicio`),
+  KEY `num_solicitud` (`num_solicitud`),
+  KEY `cod_servicio` (`cod_servicio`),
+  CONSTRAINT `detalles_solicitud_ibfk_1` FOREIGN KEY (`num_solicitud`) REFERENCES `solicitud` (`num_solicitud`),
+  CONSTRAINT `detalles_solicitud_ibfk_2` FOREIGN KEY (`cod_servicio`) REFERENCES `servicio` (`cod_servicio`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="contactanos" view="colnames">
+<left>685</left>
+<top>466</top>
+<width>131</width>
+<height>141</height>
+<sql_create_table>CREATE TABLE `contactanos` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `correo` varchar(100) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `mensaje` text NOT NULL,
+  PRIMARY KEY (`codigo`,`correo`,`fecha`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="contactanos_solicitud" view="colnames">
+<left>515</left>
+<top>21</top>
+<width>151</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `contactanos_solicitud` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `num_solicitud` int(11) NOT NULL,
+  `mensaje` text NOT NULL,
+  `usuario` varchar(20) NOT NULL,
+  PRIMARY KEY (`codigo`,`num_solicitud`,`usuario`),
+  KEY `num_solicitud` (`num_solicitud`),
+  KEY `usuario` (`usuario`),
+  CONSTRAINT `contactanos_solicitud_ibfk_1` FOREIGN KEY (`num_solicitud`) REFERENCES `solicitud` (`num_solicitud`),
+  CONSTRAINT `contactanos_solicitud_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="cotizacion" view="colnames">
+<left>214</left>
+<top>292</top>
+<width>134</width>
+<height>175</height>
+<sql_create_table>CREATE TABLE `cotizacion` (
+  `num_cotizacion` int(11) NOT NULL AUTO_INCREMENT,
+  `EmpresaID` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `observacion` text NOT NULL,
+  `estatus` varchar(20) NOT NULL,
+  `total` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`num_cotizacion`,`EmpresaID`),
+  KEY `EmpresaID` (`EmpresaID`),
+  CONSTRAINT `cotizacion_ibfk_1` FOREIGN KEY (`EmpresaID`) REFERENCES `empresa` (`EmpresaID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="detalle_cotizacion" view="colnames">
+<left>16</left>
+<top>271</top>
+<width>134</width>
+<height>141</height>
+<sql_create_table>CREATE TABLE `detalle_cotizacion` (
+  `DetalleID` int(11) NOT NULL AUTO_INCREMENT,
+  `num_cotizacion` int(11) NOT NULL,
+  `cod_servicio` int(11) NOT NULL,
+  PRIMARY KEY (`DetalleID`,`num_cotizacion`,`cod_servicio`),
+  KEY `cod_servicio` (`cod_servicio`),
+  KEY `num_cotizacion` (`num_cotizacion`),
+  CONSTRAINT `detalle_cotizacion_ibfk_1` FOREIGN KEY (`cod_servicio`) REFERENCES `servicio` (`cod_servicio`),
+  CONSTRAINT `detalle_cotizacion_ibfk_2` FOREIGN KEY (`num_cotizacion`) REFERENCES `cotizacion` (`num_cotizacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="documento" view="colnames">
+<left>834</left>
+<top>20</top>
+<width>153</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `documento` (
+  `codigo_documento` int(11) NOT NULL AUTO_INCREMENT,
+  `documento` varchar(250) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  PRIMARY KEY (`codigo_documento`),
+  KEY `usuario` (`usuario`),
+  CONSTRAINT `documento_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

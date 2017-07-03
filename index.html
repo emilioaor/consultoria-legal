@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Consultores</title>
+<script type="text/javascript" src="JavaScript/Otros_Eventos.js"></script>
+<script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
+<link href="css/tipos_letras.css" rel="stylesheet" type="text/css" />
+<link href="css/estilos_basicos.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#p1 {
+	height: 300px;
+	width: 1200px;
+}
+#p2 {
+	height: 150px;
+	width: 950px;
+	float: right;
+	margin-top: 10px;
+	text-align: center;
+}
+#p3 {
+	width: 950px;
+	float: left;
+	margin-top: 50px;
+	height: 500px;
+	text-align: center;
+}
+table {
+	margin-right: auto;
+	margin-left: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333;
+}
+.hoja_clic {
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+#principal2 {
+	margin-right: auto;
+	margin-left: auto;
+	height: 1030px;
+	width: 1200px;
+	background-color: #FFF;
+}
+.tabla_ingreso {
+	margin-right: auto;
+	margin-left: auto;
+	background-image: url(imagenes/fondo_ingreso.png);
+	background-repeat: no-repeat;
+	color: #FFF;
+	background-size: 100% 100%;
+	font-size: 12px;
+}
+.boton_menu {
+	width: 190px;
+	height: 60px;
+	position: relative;
+	text-decoration: none;
+}
+.boton_menu:hover {
+	width: 190px;
+	height: 60px;
+	position: relative;
+	text-decoration: none;
+	-webkit-animation: animacion_boton 0.8s;
+	-webkit-animation-iteration-count:infinite;
+	-moz-animation: animacion_boton 0.8s;
+	-moz-animation-iteration-count:infinite;
+	-ms-animation: animacion_boton 0.8s;
+	-ms-animation-iteration-count:infinite;
+	/*left: 10px;
+	top: -5px;*/
+}
+
+@-webkit-keyframes animacion_boton{
+	
+	0%{-webkit-transform:translate(0px,0px);}
+		
+	50%{-webkit-transform:translate(10px,-5px);}
+		
+	100%{-webkit-transform:translate(0,0);}
+}
+@keyframes animacion_boton{
+	
+	0%{transform:translate(0px,0px);}
+		
+	50%{transform:translate(10px,-5px);}
+		
+	100%{transform:translate(0,0);}
+}
+.boton_ingresar {
+	height: 25px;
+	width: 70px;
+	background-color: #021D48;
+	border: 3px solid #FF9900;
+	color: #FFF;
+}
+
+
+
+.caja {
+	width: 100px;
+	height: 20px;
+}
+</style>
+</head>
+
+<body >
+<div id="banner">D&amp;T Consultores C.A </div>
+<div id="principal2">
+
+  <div id="p1">
+    <img src="imagenes/banner.gif" width="100%" height="250px" />
+  </div>
+  <div id="menu"> 
+    <table width="250" border="0">
+      <tr>
+        <th height="75" scope="col"><a href="index.html"><img src="imagenes/btn_inicio.png" width="190" height="60" class="boton_menu" /></a></th>
+      </tr>
+      <tr>
+        <th height="75" scope="col"><a href="informacion.html"><img src="imagenes/btn_qs.png" width="190" height="60" class="boton_menu" /></a></th>
+      </tr>
+      <tr>
+        <th height="75" scope="col"><a href="registro.php"><img src="imagenes/btn_registro.png" width="190" height="60" class="boton_menu" /></a></th>
+      </tr>
+      <tr>
+        <th height="75" scope="col"><a href="contactanos.php"><img src="imagenes/btn_contactanos.png" width="190" height="60" class="boton_menu" /></a></th>
+      </tr>
+    </table>
+    <br />
+    
+    <form action="php/ingreso_usuario.php" method="post">
+    <table width="147" height="165" border="0" class="tabla_ingreso">
+  <tr>
+    <th width="141" height="42" scope="col">&nbsp;</th>
+  </tr>
+  <tr>
+    <th height="17" scope="col">Usuario</th>
+  </tr>
+  <tr>
+    <th height="21" scope="col"><label for="usuario"></label>
+      <input type="text" name="usuario" id="usuario" class="caja"/></th>
+  </tr>
+  <tr>
+    <th height="17" scope="col">Contraseña</th>
+  </tr>
+  <tr>
+    <th height="21" scope="col"><input type="password" name="contra" id="contra" class="caja" /></th>
+  </tr>
+  <tr>
+    <th height="28" scope="col"><input name="button" type="submit" class="boton_ingresar" id="button" value="Ingresar" /></th>
+  </tr>
+  </table>
+</form>
+    
+  </div>
+  
+  <div id="p3">
+  <table width="940" height="481" border="0" class="hoja_clic" id="p4">
+  <tr>
+    <th height="137" colspan="2" scope="col">D&T Consultores C.A ofrece los servicios de asesoría y consultoría legal con un nivel de excelencia y mejora continua, buscando en todo tiempo cumplir con las metas de calidad, eficacia y eficiencia en el ámbito legal a modo de unificar y consolidar las normas jurídicas aplicables al servicio público que presta <br />
+      <a href="informacion.html">[Mas Informacion...]</a></p></th>
+    </tr>
+  <tr>
+    <th height="148" scope="col" colspan="2"><img src="imagenes/consultoria_legal.png" width="940" height="200" /></th>
+    </tr>
+  <tr>
+    <th width="366" height="134" scope="col">Telefonos de Contacto:<br />
+0414-111-1111<br />
+0412-222-2222</th>
+    <th width="366" height="134" scope="col">Para contactarnos sin necesidad de registrarse y así aclarar  cualquier duda sobre el servicio a solicitar <br />      <a href="contactanos.php">[Ir a Contactanos..]</a></th>
+    </tr>
+  </table>
+  
+  <br />
+  <br />
+  
+  
+  </div>
+</div>
+<div id="pie">
+	D&amp;T Consultores C.A<br />
+  Emilio Ochoa C.I V-21.029.522</div>
+
+</body>
+</html>
